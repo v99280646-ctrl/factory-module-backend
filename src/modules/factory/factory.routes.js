@@ -2,6 +2,7 @@ import express from 'express';
 
 import * as factoryController from './factory.controller.js';
 import validate from '../../middlewares/validate.js';
+import { requireAuth, requireSuperAdmin } from '../../middlewares/auth.js';
 import {
   createFactorySchema,
   updateFactorySchema,
@@ -9,6 +10,8 @@ import {
 } from './factory.validation.js';
 
 const router = express.Router();
+
+router.use(requireAuth, requireSuperAdmin);
 
 router
   .route('/')

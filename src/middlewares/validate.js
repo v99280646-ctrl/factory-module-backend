@@ -21,7 +21,9 @@ export default function validate(schema) {
 
     req.body = result.data.body || req.body;
     req.params = result.data.params || req.params;
-    req.query = result.data.query || req.query;
+    if (result.data.query) {
+      Object.assign(req.query, result.data.query);
+    }
 
     next();
   };
